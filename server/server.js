@@ -11,6 +11,7 @@ const studentRoutes = require("./routes/studentRoutes");
 const classRoutes = require("./routes/classRoutes");
 const subjectRoutes = require("./routes/subjectRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 // Middleware
 const errorMiddleware = require("./middleware/errorMiddleware");
@@ -39,7 +40,10 @@ app.get("/", (req, res) => {
   res.send("Welcome to Student Attendance Management System API");
 });
 
-// Routes
+// Authentication Route
+app.use("/api/auth", authRoutes);
+
+// Other Routes
 app.use("/api/admin", adminRoutes);
 app.use("/api/teachers", teacherRoutes);
 app.use("/api/students", studentRoutes);
