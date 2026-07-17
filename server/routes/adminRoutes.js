@@ -6,7 +6,15 @@ const {
   getAllAdmins,
 } = require("../controller/adminController");
 
-router.post("/", createAdmin);
-router.get("/", getAllAdmins);
+const {
+  protect,
+  adminOnly,
+} = require("../middleware/authMiddleware");
+
+// Only Admin can create Admin
+router.post("/", protect, adminOnly, createAdmin);
+
+// Only logged-in Admin can view all admins
+router.get("/", protect, adminOnly, getAllAdmins);
 
 module.exports = router;
